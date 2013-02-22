@@ -18,7 +18,6 @@ SRC_URI=(
 	"http://mirror.synyx.de/apache/apr/apr-util-$APR_UTIL_VER.tar.bz2"
 )
 
-IUSE=""
 
 # package specific
 LAYOUT=GNU			# Layout to use: Apache, GNU, ... (see file config.layout)

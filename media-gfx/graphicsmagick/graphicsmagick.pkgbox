@@ -14,7 +14,6 @@ SRC_URI=(
 	# another file...
 )
 
-IUSE="bzip jpeg png"
 
 S=${WORKDIR}/${MY_P}
 

@@ -10,7 +10,6 @@ DESCRIPTION="A fast, multi-threaded, multi-user SQL database server"
 HOMEPAGE="http://www.mysql.com/"
 SRC_URI="http://dev.mysql.com/get/Downloads/MySQL-${PV:0:3}/$P.tar.gz/from/http://cdn.mysql.com/?dummy=/$P.tar.gz"
 
-IUSE=""
 
 # package specific
 MYSQL_DATADIR="$INSTALLDIR/var/lib/mysql"

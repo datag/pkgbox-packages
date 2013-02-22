@@ -7,5 +7,4 @@ DESCRIPTION="crosstool-NG aims at building toolchains."
 HOMEPAGE="http://crosstool-ng.org/"
 SRC_URI="http://crosstool-ng.org/download/$PN/$P.tar.bz2"
 
-IUSE=""
 

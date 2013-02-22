@@ -12,7 +12,6 @@ DESCRIPTION="Provides bindings to the functions of libssh2 which implements the 
 HOMEPAGE="http://pecl.php.net/ssh2"
 SRC_URI="http://pecl.php.net/get/$MY_P.tgz"
 
-IUSE=""
 
 S=${WORKDIR}/${MY_P}
 

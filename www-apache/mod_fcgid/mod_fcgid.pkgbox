@@ -10,7 +10,6 @@ DESCRIPTION="mod_fcgid is a high performance alternative to mod_cgi or mod_cgid"
 HOMEPAGE="http://httpd.apache.org/mod_fcgid/"
 SRC_URI="http://apache.openmirror.de/httpd/mod_fcgid/${P}.tar.bz2"
 
-IUSE=""
 
 # package specific
 APXS="$INSTALLDIR/bin/apxs"
