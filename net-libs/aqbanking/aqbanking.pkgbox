@@ -1,0 +1,30 @@
+# pkgbox: AqBanking
+PKGBOX_API=1
+
+pkgVer 5.0.25
+
+DESCRIPTION="Generic Online Banking Interface"
+HOMEPAGE="http://www.aquamaniac.de/aqbanking/"
+SRC_URI="dummy:///$P.tar.gz"
+
+
+# package specific
+BACKENDS="aqnone aqhbci"
+
+# very strange download mechanism: part "release" is dynamic -> determine download URI
+src_fetch() {
+	local package="03"
+	local release=$(pkgbox_download "http://www.aquamaniac.de/sites/download/packages.php?package=$package\&showall=1" - | \
+		grep -o "package=$package.*name=\"$PV\"" | grep -o "release=[0-9]*" | cut -d= -f2)
+	
+	pkgbox_download "http://www2.aquamaniac.de/sites/download/download.php?package=$package\&release=$release\&file=01" $P.tar.gz
+}
+
+src_compile() {
+	pkgConfigure \
+		--enable-cli \
+		--with-backends="$BACKENDS" \
+		--enable-gwenhywfar \
+		--with-gwen-dir="$INSTALLDIR"
+}
+

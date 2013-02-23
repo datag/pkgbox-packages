@@ -1,0 +1,39 @@
+# pkgbox: Gwenhywfar
+PKGBOX_API=1
+
+pkgVer 4.3.3
+
+
+DESCRIPTION="Helper library used in aquamanic software"
+HOMEPAGE="http://www.aquamaniac.de/aqbanking/"
+SRC_URI="dummy:///$P.tar.gz"
+
+
+# package specific
+GUIS=""
+
+# very strange download mechanism: part "release" is dynamic -> determine download URI
+src_fetch() {
+	local package="01"
+	local release=$(pkgbox_download "http://www.aquamaniac.de/sites/download/packages.php?package=$package\&showall=1" - | \
+		grep -o "package=$package.*name=\"$PV\"" | grep -o "release=[0-9]*" | cut -d= -f2)
+	
+	pkgbox_download "http://www2.aquamaniac.de/sites/download/download.php?package=$package\&release=$release\&file=01" $P.tar.gz
+}
+
+src_prepare() {
+	if [[ ${PKGBOX_OPTS[P_CERTACCEPT]} ]]; then
+		pkgbox_msg info "Applying dirty hack for skipping the \"accept certificate\" prompt " \
+			"in CLI version in order to support non-interactive scripts."
+		patch -N -p1 <$FILESDIR/gwenhywfar-4.3.3-no-sslcert-confirmation.patch
+	fi
+}
+
+src_compile() {
+	pkgConfigure \
+		--enable-visibility \
+		--enable-ssl \
+		--disable-fox \
+		--with-guis="$GUIS"
+}
+

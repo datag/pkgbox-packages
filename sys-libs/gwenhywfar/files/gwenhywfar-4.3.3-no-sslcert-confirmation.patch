@@ -1,0 +1,15 @@
+Dirty hack for skipping the "accept certificate" prompt in CLI version
+in order to support non-interactive scripts.
+--- a/src/gui/gui.c	2012-06-03 04:25:35.557353682 +0200
++++ b/src/gui/gui.c	2012-06-03 04:25:55.750101215 +0200
+@@ -1168,6 +1168,10 @@
+ 	   statusOff
+ 	  );
+ 
++  /* HACK: do not prompt for confirmation */
++  return 0;
++  /****************************************/
++
+   rv=GWEN_Gui_MessageBox(GWEN_GUI_MSG_FLAGS_TYPE_WARN |
+ 			 GWEN_GUI_MSG_FLAGS_CONFIRM_B1 |
+ 			 GWEN_GUI_MSG_FLAGS_SEVERITY_DANGEROUS,
