@@ -22,7 +22,7 @@ src_fetch() {
 }
 
 src_prepare() {
-	if [[ ${PKGBOX_OPTS[P_CERTACCEPT]} ]]; then
+	if [[ ${PKGBOX_OPTS[P_CERTACCEPT]-} ]]; then
 		pkgbox_msg info "Applying dirty hack for skipping the \"accept certificate\" prompt " \
 			"in CLI version in order to support non-interactive scripts."
 		patch -N -p1 <$FILESDIR/gwenhywfar-4.3.3-no-sslcert-confirmation.patch
