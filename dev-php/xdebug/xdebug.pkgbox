@@ -16,8 +16,7 @@ SRC_URI="http://xdebug.org/files/$P.tgz"
 PHPIZE="$INSTALLDIR/bin/phpize"
 PHPCONFIG="$INSTALLDIR/bin/php-config"
 
-src_configure()
-{
+src_configure() {
 	$PHPIZE
 	
 	# --prefix will be ignored if php-config provided

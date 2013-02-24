@@ -18,8 +18,7 @@ LAYOUT=GNU		# PHP, GNU
 CONFIG_FILE_PATH="$INSTALLDIR/etc"
 MYSQL_SOCK="$INSTALLDIR/var/run/mysqld/mysqld.sock"
 
-src_configure()
-{
+src_configure() {
 	pkgConfigure \
 		--with-layout=$LAYOUT \
 		--enable-cgi \

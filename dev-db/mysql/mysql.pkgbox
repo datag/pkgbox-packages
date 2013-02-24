@@ -19,8 +19,7 @@ MYSQL_UNIX_ADDR="$INSTALLDIR/var/run/mysqld/mysqld.sock"
 # install MySQL in separate directory (has strange layout...)
 MY_INSTALLDIR="$INSTALLDIR/mysql"
 
-src_configure()
-{
+src_configure() {
 	cmake \
 		-DCMAKE_INSTALL_PREFIX="$MY_INSTALLDIR" \
 		-DINSTALL_BINDIR="$INSTALLDIR/bin" \

@@ -14,8 +14,7 @@ SRC_URI="http://apache.openmirror.de/httpd/mod_fcgid/${P}.tar.bz2"
 # package specific
 APXS="$INSTALLDIR/bin/apxs"
 
-src_configure()
-{
+src_configure() {
 	CONFIGURE_SCRIPT=./configure.apxs
 	
 	APXS="$APXS" \
