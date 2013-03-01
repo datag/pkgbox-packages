@@ -12,6 +12,10 @@ SRC_URI="http://ftp.gnu.org/gnu/$PN/$P.tar.gz"
 SCM_URI="git://git.savannah.gnu.org/hello.git"
 
 src_prepare() {
-	pkgUseScm && ./bootstrap
+	if pkgUseScm; then
+		./bootstrap
+	else
+		:
+	fi
 }
 
