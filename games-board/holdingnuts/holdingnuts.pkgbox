@@ -11,15 +11,12 @@ HOMEPAGE="http://www.holdingnuts.net/"
 SRC_URI="http://download.holdingnuts.net/release/$PV/$P.tar.bz2"
 SCM_URI="https://holdingnuts.svn.sourceforge.net/svnroot/holdingnuts/"
 
+
 src_prepare() {
 	# apply patch for versions matching 0.0.5
 	if [[ $P == *0.0.5* ]]; then
-		patch -N -p1 <"$FILESDIR/holdingnuts-0.0.5-wheel.patch" || {
-			(( $? > 1 )) && { pkgbox_msg error "Error applying patch"; return 1; }
-		}
+		pkgPatch "${FILESDIR}/${PN}-0.0.5-wheel.patch"
 	fi
-	
-	return 0
 }
 
 src_configure() {
