@@ -7,10 +7,12 @@ pkgVer 4.3.3
 DESCRIPTION="Helper library used in aquamanic software"
 HOMEPAGE="http://www.aquamaniac.de/aqbanking/"
 SRC_URI="dummy:///$P.tar.gz"
+FEATURES=(
+	"gwenhywfar:plugins-ct=ohbci"
+	"gwenhywfar:guis=none"
+	"-gwenhywfar:certaccept"			# patch / datag dirty hack: Accept SSL certificate
+)
 
-
-# package specific
-GUIS=""
 
 # very strange download mechanism: part "release" is dynamic -> determine download URI
 src_fetch() {
@@ -22,19 +24,19 @@ src_fetch() {
 }
 
 src_prepare() {
-	# FIXME: Make use of (future) package option $F
-	if [[ ${O[P_CERTACCEPT]-} ]]; then
+	if pkgUse gwenhywfar:certaccept; then
 		pkgbox_msg info "Applying dirty hack for skipping the \"accept certificate\" prompt " \
 			"in CLI version in order to support non-interactive scripts."
-		patch -N -p1 <$FILESDIR/gwenhywfar-4.3.3-no-sslcert-confirmation.patch
+		pkgPatch "$FILESDIR/gwenhywfar-4.3.3-no-sslcert-confirmation.patch"
 	fi
 }
 
-src_compile() {
+src_configure() {
 	pkgConfigure \
 		--enable-visibility \
 		--enable-ssl \
 		--disable-fox \
-		--with-guis="$GUIS"
+		"$(pkgWith gwenhywfar:plugins-ct plugins-ct)" \
+		"$(pkgWith gwenhywfar:guis guis)"
 }
 
