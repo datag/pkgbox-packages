@@ -1,0 +1,23 @@
+# pkgbox: serf
+PKGBOX_API=1
+
+pkgVer 1.2.0
+
+DESCRIPTION="HTTP client library built upon APR"
+HOMEPAGE="http://code.google.com/p/serf/"
+SRC_URI="http://serf.googlecode.com/files/${P}.tar.bz2"
+#SCM_URI="http://serf.googlecode.com/svn/"
+FEATURES=(
+	"apr=${O[prefix]}"				# prefix to APR installation or path to apr-config
+	"apr-util=${O[prefix]}"			# prefix to APU installation or path to apu-config
+	"ssl"							# hard requirement, can't be disabled. set to alternate OpenSSL path if desired
+)
+
+
+src_configure() {
+	pkgConfigure \
+		$(pkgWith apr) \
+		$(pkgWith apr-util) \
+		$(pkgWith ssl openssl -omitempty)
+}
+

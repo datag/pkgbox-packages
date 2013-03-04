@@ -6,41 +6,30 @@ PKGBOX_API=1
 
 pkgVer 2.4.3
 MY_P=${P/apache/httpd}
-
-APR_VER=1.4.6
-APR_UTIL_VER=1.5.1
+MY_PN=${PN/apache/httpd}
 
 DESCRIPTION="The Apache Web Server"
 HOMEPAGE="http://httpd.apache.org/"
-SRC_URI=(
-	"http://mirror.synyx.de/apache/httpd/$MY_P.tar.bz2"
-	"http://mirror.synyx.de/apache/apr/apr-$APR_VER.tar.bz2"
-	"http://mirror.synyx.de/apache/apr/apr-util-$APR_UTIL_VER.tar.bz2"
+SRC_URI="http://apache.openmirror.de/$MY_PN/$MY_P.tar.bz2"
+#SCM_URI="http://svn.apache.org/repos/asf/$MY_PN/$MY_PN/"
+FEATURES=(
+	"layout=GNU"
+	"apr=${O[prefix]}"		# prefix to APR installation or path to apr-config
+	"apr-util=${O[prefix]}"	# prefix to APU installation or path to apu-config
+	"apache:mods=most"		# Modules to build: reallyall, all, most, few or none
+	"apache:mpm=worker"		# Multi-processing module: prefork, worker, event or all
 )
 
 S=${WORKDIR}/${MY_P}
 
 
-# package specific
-LAYOUT=GNU			# Layout to use: Apache, GNU, ... (see file config.layout)
-MODS_SHARED=most	# Modules to build: reallyall, all, most, few or none
-MPM=worker			# Multi-processing module: prefork, worker or event
-
-src_unpack() {
-	pkgbox_unpack "${PKGBOX_DIR[download]}/$MY_P.tar.bz2"
-	
-	pkgbox_unpack "${PKGBOX_DIR[download]}/apr-$APR_VER.tar.bz2" "$S/srclib"
-	mv "$S/srclib/apr-$APR_VER" "$S/srclib/apr"
-	
-	pkgbox_unpack "${PKGBOX_DIR[download]}/apr-util-$APR_UTIL_VER.tar.bz2" "$S/srclib"
-	mv "$S/srclib/apr-util-$APR_UTIL_VER" "$S/srclib/apr-util"
-}
-
-src_configure() {
+src_configure()
+{
 	pkgConfigure \
-		--enable-layout=$LAYOUT \
-		--enable-mods-shared=$MODS_SHARED \
-		--with-mpm=$MPM \
-		--with-included-apr
+		$(pkgEnable layout) \
+		$(pkgWith apr) \
+		$(pkgWith apr-util) \
+		"$(pkgEnable apache:mods mods-shared)" \
+		$(pkgWith apache:mpm mpm)
 }
 
