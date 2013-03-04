@@ -8,7 +8,7 @@ HOMEPAGE="http://www.aquamaniac.de/aqbanking/"
 SRC_URI="dummy:///$P.tar.gz"
 FEATURES=(
 	"cli"
-	"aqbanking:backends=aqnone aqhbci"
+	"aqbanking:backends=aqnone aqhbci"		# Backends; "all" or empty value equals "aqhbci aqnone aqofxconnect"; aqpaypal
 )
 
 
@@ -24,7 +24,7 @@ src_fetch() {
 src_configure() {
 	pkgConfigure \
 		$(pkgEnable cli) \
-		"$(pkgWith aqbanking:backends backends)" \
+		"$(pkgWith aqbanking:backends backends -omitempty)" \
 		--enable-gwenhywfar \
 		--with-gwen-dir="${O[prefix]}"
 }

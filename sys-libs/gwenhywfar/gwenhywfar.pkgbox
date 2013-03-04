@@ -8,9 +8,9 @@ DESCRIPTION="Helper library used in aquamanic software"
 HOMEPAGE="http://www.aquamaniac.de/aqbanking/"
 SRC_URI="dummy:///$P.tar.gz"
 FEATURES=(
-	"gwenhywfar:plugins-ct=ohbci"
-	"gwenhywfar:guis=none"
-	"-gwenhywfar:certaccept"			# patch / datag dirty hack: Accept SSL certificate
+	"gwenhywfar:plugins-ct=ohbci"		# Plugins: "ohbci" is only plugin at time of 4.3.3
+	"gwenhywfar:guis="					# GUIs: qt4 gtk2
+	"-gwenhywfar:certaccept"			# apply "unusual" patch: Accept SSL certificate w/o user interaction
 )
 
 
@@ -36,7 +36,7 @@ src_configure() {
 		--enable-visibility \
 		--enable-ssl \
 		--disable-fox \
-		"$(pkgWith gwenhywfar:plugins-ct plugins-ct)" \
+		"$(pkgWith gwenhywfar:plugins-ct plugins-ct -omitempty)" \
 		"$(pkgWith gwenhywfar:guis guis)"
 }
 
