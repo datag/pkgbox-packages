@@ -13,6 +13,7 @@ FEATURES=(
 	"layout=GNU"
 	"apr=${O[prefix]}"		# prefix to APR installation or path to apr-config
 	"ssl"
+	"sqlite3"
 )
 
 
@@ -25,11 +26,11 @@ src_configure() {
 		$(pkgEnable layout) \
 		$(pkgWith apr) \
 		$(pkgWith ssl openssl) \
+		$(pkgWith sqlite3) \
 		--without-berkeley-db \
 		--without-gdbm \
 		--without-ldap \
 		--without-sqlite2 \
-		--without-sqlite3 \
 		--without-freetds \
 		--without-mysql \
 		--without-odbc \
