@@ -15,12 +15,11 @@ FEATURES=(
 	"apr=${O[prefix]}"				# prefix to APR installation or path to apr-config
 	"apr-util=${O[prefix]}"			# prefix to APU installation or path to apu-config
 	"apxs=${O[prefix]}/bin/apxs"	# path to APXS tool
-	"apache:mod-activation"
+	"-apache:mod-activation"		# Enable module in Apache configuration
 	"editor=/usr/bin/vim"
 	"nls"
 	"ssl"
-	"-java"
-	"serf=${O[prefix]}"
+	"serf=${O[prefix]}"				# Use Serf for DAV support (HTTP/HTTPS)
 	"sqlite3"						# required!
 )
 
@@ -42,7 +41,7 @@ src_configure() {
 		--without-sasl \
 		--without-swig \
 		--without-ctypesgen \
-		$(pkgEnable java javahl) \
+		--disable-javahl \
 		--disable-keychain \
 		--without-kwallet \
 		--without-gnome-keyring
