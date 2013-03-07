@@ -6,67 +6,77 @@ PKGBOX_API=1
 # List of core configure options: http://php.net/manual/en/configure.about.php
 # Configure script (trunk): http://svn.php.net/viewvc/php/php-src/trunk/configure.in?view=markup
 
-pkgVer 5.4.9
+pkgVer 5.4.12
 
 DESCRIPTION="The PHP language runtime engine"
 HOMEPAGE="http://php.net/"
 SRC_URI="http://de3.php.net/get/${P}.tar.bz2/from/this/mirror?dummy=/${P}.tar.bz2"
+SCM_URI="http://git.php.net/repository/php-src.git"
+FEATURES=(
+	"layout=GNU"
+	"-apxs=${O[prefix]}/bin/apxs"	# build Apache2 module; path to APXS tool
+	"cgi"							# FastCGI
+	"php:config-file-path=${O[prefix]}/etc/php"				# path to php.ini
+	"php:config-file-scan-dir=${O[prefix]}/etc/php/conf.d"	# additional config files
+	"mysql:socket=/var/run/mysqld/mysqld.sock"
+	"cli"							# Support for CLI
+)
 
-
-# package specific
-LAYOUT=GNU		# PHP, GNU
-CONFIG_FILE_PATH="$INSTALLDIR/etc"
-MYSQL_SOCK="$INSTALLDIR/var/run/mysqld/mysqld.sock"
 
 src_configure() {
 	pkgConfigure \
-		--with-layout=$LAYOUT \
-		--enable-cgi \
-		--with-config-file-path="$CONFIG_FILE_PATH" \
+		$(pkgWith layout) \
+		$(pkgWith apxs apxs2) \
+		$(pkgEnable cgi) \
+		$(pkgWith php:config-file-path config-file-path -omitempty) \
+		$(pkgWith php:config-file-scan-dir config-file-scan-dir -omitempty) \
 		--disable-debug \
+		--enable-mbstring \
 		--with-regex=php \
-		--disable-rpath \
-		--disable-static \
+		--with-pcre-regex \
 		--with-pic \
 		--enable-calendar \
 		--enable-sysvsem \
 		--enable-sysvshm \
 		--enable-sysvmsg \
+		--enable-shmop \
 		--enable-bcmath \
 		--with-bz2 \
 		--enable-ctype \
 		--with-iconv \
-		--enable-exif \
 		--enable-ftp \
 		--with-gettext \
-		--enable-mbstring \
-		--with-pcre-regex=/usr \
-		--enable-shmop \
 		--enable-sockets \
 		--enable-wddx \
 		--with-libxml-dir=/usr \
-		--with-zlib \
+		--with-xsl=/usr \
+		--with-zlib=/usr \
 		--with-openssl=/usr \
 		--enable-zip \
 		--with-mhash=yes \
 		--without-mm \
-		--with-curl=/usr \
-		--with-zlib-dir=/usr \
-		--with-gd --enable-gd-native-ttf \
+		--with-curl \
+		--with-zlib-dir \
+		--with-gd \
+		--enable-gd-native-ttf \
+		--with-freetype-dir=/usr \
 		--with-jpeg-dir=/usr \
 		--with-png-dir=/usr \
-		--with-freetype-dir=/usr \
-		--enable-intl \
+		--enable-exif \
 		--with-mysql=mysqlnd \
 		--with-mysqli=mysqlnd \
-		--with-xsl=/usr \
-		--with-sqlite3=/usr \
+		--with-sqlite3 \
 		--enable-pdo \
 		--with-pdo-mysql=mysqlnd \
-		--with-pdo-sqlite=/usr \
-		--with-mysql-sock="$MYSQL_SOCK" \
+		--with-pdo-sqlite \
+		$(pkgWith mysql:socket mysql-sock -omitempty) \
+		$(pkgEnable cli) \
 		--with-readline
 		
+		#--disable-rpath \
+		#--disable-static \
+		
+		#	--enable-intl \
 		#	--with-mcrypt \
 		#	--with-pspell=/usr \
 		#	--with-recode=/usr \
