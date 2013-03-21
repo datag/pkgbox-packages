@@ -1,0 +1,27 @@
+# pkgbox: Apache People mod_macro
+PKGBOX_API=1
+
+# http://people.apache.org/~fabien/mod_macro/mod_macro.html
+
+pkgVer 1.2.1
+
+DESCRIPTION="Allows the definition and use of macros (configuration templates) within apache runtime configuration files"
+HOMEPAGE="http://people.apache.org/~fabien/mod_macro/"
+SRC_URI="http://people.apache.org/~fabien/$PN/$P.tar.gz"
+FEATURES=(
+	"apxs=${O[prefix]}/bin/apxs"	# path to APXS tool
+)
+
+
+src_configure() {
+	:
+}
+
+src_compile() {
+	$(pkgUseValue apxs) -c mod_macro.c
+}
+
+src_install() {
+	$(pkgUseValue apxs) -i -a mod_macro.la
+}
+
