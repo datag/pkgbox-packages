@@ -26,6 +26,11 @@ FEATURES=(
 	"ssl"
 )
 
+if pkgUseScm; then
+	src_prepare() {
+		./buildconf
+	}
+fi
 
 src_configure() {
 	pkgConfigure \
