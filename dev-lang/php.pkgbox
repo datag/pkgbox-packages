@@ -23,6 +23,7 @@ FEATURES=(
 	"-php:sysvsem"
 	"-php:sysvshm"
 	"-php:sysvmsg"
+	"php:opcache"					# Zend OPcache (>=PHP-5.5)
 	"ssl"
 )
 
@@ -39,6 +40,7 @@ src_configure() {
 		$(pkgEnable cgi) \
 		$(pkgWith php:config-file-path config-file-path -omitempty) \
 		$(pkgWith php:config-file-scan-dir config-file-scan-dir -omitempty) \
+		$(pkgEnable php:opcache opcache) \
 		--enable-mbstring \
 		--enable-calendar \
 		$(pkgEnable php:sysvsem sysvsem) \
