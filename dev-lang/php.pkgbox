@@ -18,7 +18,7 @@ FEATURES=(
 	"cgi"							# FastCGI
 	"php:config-file-path=${O[prefix]}/etc/php"				# path to php.ini
 	"php:config-file-scan-dir=${O[prefix]}/etc/php/conf.d"	# additional config files
-	"mysql:socket=/var/run/mysqld/mysqld.sock"
+	"mysql:socket=/tmp/mysqld.sock"
 	"cli"							# Support for CLI
 	"-php:sysvsem"
 	"-php:sysvshm"
