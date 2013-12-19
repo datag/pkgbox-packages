@@ -4,7 +4,7 @@ PKGBOX_API=1
 # http://subversion.apache.org/source-code.html
 # http://svn.apache.org/repos/asf/subversion/trunk/INSTALL
 
-pkgVer 1.7.8
+pkgVer 1.8.5
 
 DESCRIPTION="Advanced version control system"
 HOMEPAGE="http://subversion.apache.org/"
@@ -36,7 +36,6 @@ src_configure() {
 		$(pkgWith sqlite3 sqlite -omitempty)  $(: "hard requirement") \
 		--with-zlib \
 		$(pkgWith serf) \
-		--without-neon --disable-neon-version-check \
 		--without-berkeley-db \
 		--without-sasl \
 		--without-swig \

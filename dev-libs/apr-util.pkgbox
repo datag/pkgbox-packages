@@ -3,7 +3,7 @@ PKGBOX_API=1
 
 # Building on UNIX: http://apr.apache.org/compiling_unix.html
 
-pkgVer 1.5.1
+pkgVer 1.5.3
 
 DESCRIPTION="Apache Portable Runtime Utility"
 HOMEPAGE="http://apr.apache.org/"

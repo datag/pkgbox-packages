@@ -1,7 +1,7 @@
 # pkgbox: serf
 PKGBOX_API=1
 
-pkgVer 1.2.0
+pkgVer 1.3.3
 
 DESCRIPTION="HTTP client library built upon APR"
 HOMEPAGE="http://code.google.com/p/serf/"
@@ -13,11 +13,18 @@ FEATURES=(
 	"ssl"							# hard requirement, can't be disabled. set to alternate OpenSSL path if desired
 )
 
-
 src_configure() {
-	pkgConfigure \
-		$(pkgWith apr) \
-		$(pkgWith apr-util) \
-		$(pkgWith ssl openssl -omitempty)
+	:
 }
 
+src_compile() {
+	scons \
+		PREFIX=$INSTALLDIR \
+		APR=$(pkgUseValue apr) \
+		APU=$(pkgUseValue apr-util) \
+		OPENSSL=$(pkgUseValue ssl)
+}
+
+src_install() {
+	${O[sudo]-} scons install
+}
