@@ -2,16 +2,17 @@
 PKGBOX_API=1
 
 # https://code.google.com/p/tesseract-ocr/wiki/Compiling
+# https://code.google.com/p/tesseract-ocr/wiki/TesseractSvnInstallation
 
 pkgVer 3.02.02
 
-DESCRIPTION="Tesseract OCR"
+DESCRIPTION="OCR engine developed at Google"
 HOMEPAGE="https://code.google.com/p/tesseract-ocr/"
 SRC_URI="https://tesseract-ocr.googlecode.com/files/$P.tar.gz"
 SCM_URI="http://tesseract-ocr.googlecode.com/svn/"
 FEATURES=(
-	tessdata-version=3.02
-	tessdata-lang="eng deu"
+	tessdata-version=3.02		# for builds via source package
+	tessdata-langs="eng deu"	# languages to install (empty means all)
 )
 S=$WORKDIR/$PN
 
@@ -21,22 +22,26 @@ src_prepare() {
 }
 
 src_configure() {
-	LIBLEPT_HEADERSDIR=$INSTALLDIR/include pkgConfigure \
-		--with-extra-libraries=$INSTALLDIR/lib
+	LIBLEPT_HEADERSDIR=$INSTALLDIR/include \
+		pkgConfigure \
+			--with-extra-libraries=$INSTALLDIR/lib
 }
 
 src_install() {
 	SUDO=${O[sudo]-} pkgMake install
 	
-
-	# language files
-	# FIXME: download in src_fetch()
-	local uri=$SRC_URI filename=${SRC_URI##*/} tessdata_version=$(pkgUseValue tessdata-version)
-	
-	for lang in $(pkgUseValue tessdata-lang); do
-		uri="http://tesseract-ocr.googlecode.com/files/$PN-$tessdata_version.$lang.tar.gz"
-		filename=${uri##*/}
-		pkgbox_download "$uri" "$filename"
-		${O[sudo]-} tar xvf ${PKGBOX_DIR[download]}/$PN-$tessdata_version.$lang.tar.gz -C $INSTALLDIR/share --strip=1
-	done
+	# languages
+	if pkgUseScm; then
+		SUDO=${O[sudo]-} pkgMake install-langs LANGS="$(pkgUseValue tessdata-langs)"
+	else
+		# FIXME: download in src_fetch()
+		local uri=$SRC_URI filename=${SRC_URI##*/} version=$(pkgUseValue tessdata-version)
+		
+		for lang in $(pkgUseValue tessdata-langs); do
+			uri="http://tesseract-ocr.googlecode.com/files/$PN-$tessdata_version.$lang.tar.gz"
+			filename=${uri##*/}
+			pkgbox_download "$uri" "$filename"
+			${O[sudo]-} tar xvf ${PKGBOX_DIR[download]}/$PN-$tessdata_version.$lang.tar.gz -C $INSTALLDIR/share --strip=1
+		done
+	fi
 }
