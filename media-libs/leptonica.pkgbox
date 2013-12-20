@@ -1,0 +1,15 @@
+# pkgbox: Leptonica
+PKGBOX_API=1
+
+# http://www.leptonica.org/source/README.html
+
+pkgVer 1.69
+
+DESCRIPTION="Leptonica Library"
+HOMEPAGE="https://code.google.com/p/leptonica/"
+SRC_URI="https://leptonica.googlecode.com/files/$P.tar.bz2"
+#SCM_URI="http://leptonica.googlecode.com/svn/"
+FEATURES=(
+
+)
+
