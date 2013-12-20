@@ -13,6 +13,8 @@ FEATURES=(
 	tessdata-version=3.02
 	tessdata-lang="eng deu"
 )
+S=$WORKDIR/$PN
+
 
 src_prepare() {
 	./autogen.sh
