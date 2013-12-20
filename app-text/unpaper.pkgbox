@@ -1,0 +1,21 @@
+# pkgbox: unpaper
+PKGBOX_API=1
+
+pkgVer master
+
+DESCRIPTION="Post-processor for scanned and photocopied book pages"
+HOMEPAGE="http://www.flameeyes.eu/projects/unpaper"
+#SRC_URI=""
+SCM_URI="https://github.com/Flameeyes/unpaper.git"
+FEATURES=(
+
+)
+
+
+src_prepare() {
+	# patch configure.ac for required automake version: 1.11
+	sed -i -e 's/AM_INIT_AUTOMAKE(\[1.13/AM_INIT_AUTOMAKE(\[1.11/g' configure.ac
+	
+	autoreconf -vif
+}
+
