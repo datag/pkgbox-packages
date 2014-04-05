@@ -12,7 +12,7 @@ SRC_URI="https://tesseract-ocr.googlecode.com/files/$P.tar.gz"
 SCM_URI="http://tesseract-ocr.googlecode.com/svn/"
 FEATURES=(
 	tessdata-version=3.02		# for builds via source package
-	tessdata-langs="eng deu"	# languages to install (empty means all)
+	tessdata-langs="osd eng deu"	# languages to install (empty means all)
 )
 S=$WORKDIR/$PN
 
