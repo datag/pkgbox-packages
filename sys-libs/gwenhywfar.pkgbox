@@ -1,7 +1,7 @@
 # pkgbox: Gwenhywfar
 PKGBOX_API=1
 
-pkgVer 4.3.3
+pkgVer 4.11.0beta
 
 
 DESCRIPTION="Helper library used in aquamanic software"

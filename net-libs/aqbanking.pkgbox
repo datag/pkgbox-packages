@@ -1,7 +1,7 @@
 # pkgbox: AqBanking
 PKGBOX_API=1
 
-pkgVer 5.0.25
+pkgVer 5.4.1beta
 
 DESCRIPTION="Generic Online Banking Interface"
 HOMEPAGE="http://www.aquamaniac.de/aqbanking/"
