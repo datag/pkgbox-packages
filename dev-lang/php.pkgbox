@@ -10,7 +10,7 @@ pkgVer 5.4.12
 
 DESCRIPTION="The PHP language runtime engine"
 HOMEPAGE="http://php.net/"
-SRC_URI="http://de3.php.net/get/${P}.tar.bz2/from/this/mirror?dummy=/${P}.tar.bz2"
+SRC_URI="http://de.php.net/get/${P}.tar.bz2/from/this/mirror?dummy=/${P}.tar.bz2"
 SCM_URI="http://git.php.net/repository/php-src.git"
 FEATURES=(
 	"layout=GNU"
