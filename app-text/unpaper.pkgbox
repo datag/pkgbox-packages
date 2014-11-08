@@ -6,7 +6,7 @@ pkgVer master
 DESCRIPTION="Post-processor for scanned and photocopied book pages"
 HOMEPAGE="http://www.flameeyes.eu/projects/unpaper"
 #SRC_URI=""
-SCM_URI="https://github.com/Flameeyes/unpaper.git"
+VCS_URI="https://github.com/Flameeyes/unpaper.git"
 FEATURES=(
 
 )

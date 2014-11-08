@@ -8,7 +8,7 @@ pkgVer 1.69
 DESCRIPTION="Leptonica Library"
 HOMEPAGE="https://code.google.com/p/leptonica/"
 SRC_URI="https://leptonica.googlecode.com/files/$P.tar.bz2"
-#SCM_URI="http://leptonica.googlecode.com/svn/"
+#VCS_URI="http://leptonica.googlecode.com/svn/"
 FEATURES=(
 
 )

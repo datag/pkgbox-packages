@@ -6,7 +6,7 @@ pkgVer 1.3.3
 DESCRIPTION="HTTP client library built upon APR"
 HOMEPAGE="http://code.google.com/p/serf/"
 SRC_URI="http://serf.googlecode.com/files/${P}.tar.bz2"
-#SCM_URI="http://serf.googlecode.com/svn/"
+#VCS_URI="http://serf.googlecode.com/svn/"
 FEATURES=(
 	"apr=${O[prefix]}"				# prefix to APR installation or path to apr-config
 	"apr-util=${O[prefix]}"			# prefix to APU installation or path to apu-config

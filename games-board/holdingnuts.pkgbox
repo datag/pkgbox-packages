@@ -9,7 +9,7 @@ pkgVer 0.0.5	# tags/release-0.0.5, trunk@752
 DESCRIPTION="An open source poker client and server"
 HOMEPAGE="http://www.holdingnuts.net/"
 SRC_URI="http://download.holdingnuts.net/release/$PV/$P.tar.bz2"
-SCM_URI="https://holdingnuts.svn.sourceforge.net/svnroot/holdingnuts/"
+VCS_URI="https://holdingnuts.svn.sourceforge.net/svnroot/holdingnuts/"
 
 
 src_prepare() {

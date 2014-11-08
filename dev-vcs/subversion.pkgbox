@@ -9,7 +9,7 @@ pkgVer 1.8.5
 DESCRIPTION="Advanced version control system"
 HOMEPAGE="http://subversion.apache.org/"
 SRC_URI="http://apache.openmirror.de/$PN/$P.tar.bz2"
-#SCM_URI="http://svn.apache.org/repos/asf/$PN/"
+#VCS_URI="http://svn.apache.org/repos/asf/$PN/"
 FEATURES=(
 	"layout=GNU"
 	"apr=${O[prefix]}"				# prefix to APR installation or path to apr-config

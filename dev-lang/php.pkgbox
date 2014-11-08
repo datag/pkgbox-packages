@@ -11,7 +11,7 @@ pkgVer 5.4.12
 DESCRIPTION="The PHP language runtime engine"
 HOMEPAGE="http://php.net/"
 SRC_URI="http://de.php.net/get/${P}.tar.bz2/from/this/mirror?dummy=/${P}.tar.bz2"
-SCM_URI="http://git.php.net/repository/php-src.git"
+VCS_URI="http://git.php.net/repository/php-src.git"
 FEATURES=(
 	"layout=GNU"
 	"-apxs=${O[prefix]}/bin/apxs"	# build Apache2 module; path to APXS tool
@@ -27,7 +27,7 @@ FEATURES=(
 	"ssl"
 )
 
-if pkgUseScm; then
+if pkgUseVcs; then
 	src_prepare() {
 		./buildconf
 	}

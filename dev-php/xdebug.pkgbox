@@ -10,7 +10,7 @@ pkgVer 2.2.1
 DESCRIPTION="A PHP debugging and profiling extension"
 HOMEPAGE="http://www.xdebug.org/"
 SRC_URI="http://xdebug.org/files/$P.tgz"
-SCM_URI="https://github.com/derickr/xdebug.git"
+VCS_URI="https://github.com/derickr/xdebug.git"
 FEATURES=(
 	"phpize=${O[prefix]}/bin/phpize"
 	"php-config=${O[prefix]}/bin/php-config"

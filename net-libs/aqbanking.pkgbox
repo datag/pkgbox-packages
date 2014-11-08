@@ -6,7 +6,7 @@ pkgVer 5.5.0.2-git
 DESCRIPTION="Generic Online Banking Interface"
 HOMEPAGE="http://www.aquamaniac.de/aqbanking/"
 SRC_URI="dummy:///$P.tar.gz"
-SCM_URI="http://git.aqbanking.de/git/aqbanking.git"	# http://devel.aqbanking.de/svn/aqbanking/trunk
+VCS_URI="http://git.aqbanking.de/git/aqbanking.git"	# http://devel.aqbanking.de/svn/aqbanking/trunk
 FEATURES=(
 	"cli"
 	"aqbanking:backends=aqnone aqhbci"		# Backends; "all" or empty value equals "aqhbci aqnone aqofxconnect"; aqpaypal

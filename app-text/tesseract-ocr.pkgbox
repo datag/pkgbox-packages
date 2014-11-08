@@ -9,7 +9,7 @@ pkgVer 3.02.02
 DESCRIPTION="OCR engine developed at Google"
 HOMEPAGE="https://code.google.com/p/tesseract-ocr/"
 SRC_URI="https://tesseract-ocr.googlecode.com/files/$P.tar.gz"
-SCM_URI="http://tesseract-ocr.googlecode.com/svn/"
+VCS_URI="http://tesseract-ocr.googlecode.com/svn/"
 FEATURES=(
 	tessdata-version=3.02		# for builds via source package
 	tessdata-langs="osd eng deu"	# languages to install (empty means all)
@@ -31,7 +31,7 @@ src_install() {
 	SUDO=${O[sudo]-} pkgMake install
 	
 	# languages
-	if pkgUseScm; then
+	if pkgUseVcs; then
 		SUDO=${O[sudo]-} pkgMake install-langs LANGS="$(pkgUseValue tessdata-langs)"
 	else
 		# FIXME: download in src_fetch()
