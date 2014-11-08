@@ -3,10 +3,10 @@ PKGBOX_API=1
 
 pkgVer 4.12.0beta
 
-
 DESCRIPTION="Helper library used in aquamanic software"
 HOMEPAGE="http://www.aquamaniac.de/aqbanking/"
 SRC_URI="dummy:///$P.tar.gz"
+SCM_URI="http://git.aqbanking.de/git/gwenhywfar.git"	# http://devel.aqbanking.de/svn/gwenhywfar/trunk
 FEATURES=(
 	"gwenhywfar:plugins-ct=ohbci"		# Plugins: "ohbci" is only plugin at time of 4.3.3
 	"gwenhywfar:guis="					# GUIs: qt4 gtk2
