@@ -10,7 +10,6 @@ SRC_URI="dummy:///$P.tar.gz"
 FEATURES=(
 	"gwenhywfar:plugins-ct=ohbci"		# Plugins: "ohbci" is only plugin at time of 4.3.3
 	"gwenhywfar:guis="					# GUIs: qt4 gtk2
-	"-gwenhywfar:certaccept"			# apply "unusual" patch: Accept SSL certificate w/o user interaction
 )
 
 
@@ -22,14 +21,6 @@ src_fetch() {
 		grep -o "package=$package.*name=\"$my_pv\"" | grep -o "release=[0-9]*" | cut -d= -f2)
 	
 	pkgbox_download "http://www2.aquamaniac.de/sites/download/download.php?package=$package&release=$release&file=01" $P.tar.gz
-}
-
-src_prepare() {
-	if pkgUse gwenhywfar:certaccept; then
-		pkgbox_msg info "Applying dirty hack for skipping the \"accept certificate\" prompt " \
-			"in CLI version in order to support non-interactive scripts."
-		pkgPatch "$FILESDIR/gwenhywfar-4.3.3-no-sslcert-confirmation.patch"
-	fi
 }
 
 src_configure() {
