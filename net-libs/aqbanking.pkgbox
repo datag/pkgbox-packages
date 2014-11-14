@@ -1,0 +1,33 @@
+# pkgbox: AqBanking
+PKGBOX_API=1
+
+pkgVer 5.5.0.2-git
+
+DESCRIPTION="Generic Online Banking Interface"
+HOMEPAGE="http://www.aquamaniac.de/aqbanking/"
+SRC_URI="dummy:///$P.tar.gz"
+VCS_URI="http://git.aqbanking.de/git/aqbanking.git"	# http://devel.aqbanking.de/svn/aqbanking/trunk
+FEATURES=(
+	"cli"
+	"aqbanking:backends=aqnone aqhbci"		# Backends; "all" or empty value equals "aqhbci aqnone aqofxconnect"; aqpaypal
+)
+
+
+# very strange download mechanism: part "release" is dynamic -> determine download URI
+src_fetch() {
+	local package="03"
+	local my_pv=${PV/%-git/git}		# special case
+	local release=$(pkgbox_download "http://www.aquamaniac.de/sites/download/packages.php?package=$package&showall=1" - | \
+		grep -o "package=$package.*name=\"$my_pv\"" | grep -o "release=[0-9]*" | cut -d= -f2)
+	
+	pkgbox_download "http://www2.aquamaniac.de/sites/download/download.php?package=$package&release=$release&file=01" $P.tar.gz
+}
+
+src_configure() {
+	pkgConfigure \
+		$(pkgEnable cli) \
+		"$(pkgWith aqbanking:backends backends -omitempty)" \
+		--enable-gwenhywfar \
+		--with-gwen-dir="${O[prefix]}"
+}
+

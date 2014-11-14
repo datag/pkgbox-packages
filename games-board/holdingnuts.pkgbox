@@ -1,0 +1,25 @@
+# pkgbox: HoldingNuts
+PKGBOX_API=1
+
+# http://wiki.holdingnuts.net/hacking
+# http://wiki.holdingnuts.net/devel:setup
+
+pkgVer 0.0.5	# tags/release-0.0.5, trunk@752
+
+DESCRIPTION="An open source poker client and server"
+HOMEPAGE="http://www.holdingnuts.net/"
+SRC_URI="http://download.holdingnuts.net/release/$PV/$P.tar.bz2"
+VCS_URI="https://holdingnuts.svn.sourceforge.net/svnroot/holdingnuts/"
+
+
+src_prepare() {
+	# apply patch for versions matching 0.0.5
+	if [[ $P == *0.0.5* ]]; then
+		pkgPatch "${FILESDIR}/${PN}-0.0.5-wheel.patch"
+	fi
+}
+
+src_configure() {
+	cmake -DCMAKE_INSTALL_PREFIX="$INSTALLDIR" .
+}
+

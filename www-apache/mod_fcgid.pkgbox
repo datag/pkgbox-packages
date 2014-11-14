@@ -9,17 +9,15 @@ pkgVer 2.3.7
 DESCRIPTION="mod_fcgid is a high performance alternative to mod_cgi or mod_cgid"
 HOMEPAGE="http://httpd.apache.org/mod_fcgid/"
 SRC_URI="http://apache.openmirror.de/httpd/mod_fcgid/${P}.tar.bz2"
+FEATURES=(
+	"apxs=${O[prefix]}/bin/apxs"	# path to APXS tool
+)
 
-IUSE=""
 
-# package specific
-APXS="$INSTALLDIR/bin/apxs"
-
-src_configure()
-{
+src_configure() {
 	CONFIGURE_SCRIPT=./configure.apxs
 	
-	APXS="$APXS" \
+	APXS="$(pkgUseValue apxs)" \
 		pkgConfigure
 }
 

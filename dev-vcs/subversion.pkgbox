@@ -1,0 +1,48 @@
+# pkgbox: Subversion
+PKGBOX_API=1
+
+# http://subversion.apache.org/source-code.html
+# http://svn.apache.org/repos/asf/subversion/trunk/INSTALL
+
+pkgVer 1.8.5
+
+DESCRIPTION="Advanced version control system"
+HOMEPAGE="http://subversion.apache.org/"
+SRC_URI="http://apache.openmirror.de/$PN/$P.tar.bz2"
+#VCS_URI="http://svn.apache.org/repos/asf/$PN/"
+FEATURES=(
+	"layout=GNU"
+	"apr=${O[prefix]}"				# prefix to APR installation or path to apr-config
+	"apr-util=${O[prefix]}"			# prefix to APU installation or path to apu-config
+	"apxs=${O[prefix]}/bin/apxs"	# path to APXS tool
+	"-apache:mod-activation"		# Enable module in Apache configuration
+	"editor=/usr/bin/vim"
+	"nls"
+	"ssl"
+	"serf=${O[prefix]}"				# Use Serf for DAV support (HTTP/HTTPS)
+	"sqlite3"						# required!
+)
+
+
+src_configure() {
+	pkgConfigure \
+		$(pkgWith apr) \
+		$(pkgWith apr-util) \
+		$(pkgWith apxs) \
+		$(pkgUse apxs && pkgEnable apache:mod-activation mod-activation) \
+		$(pkgEnable nls) \
+		$(pkgWith ssl openssl) \
+		$(pkgWith editor) \
+		$(pkgWith sqlite3 sqlite -omitempty)  $(: "hard requirement") \
+		--with-zlib \
+		$(pkgWith serf) \
+		--without-berkeley-db \
+		--without-sasl \
+		--without-swig \
+		--without-ctypesgen \
+		--disable-javahl \
+		--disable-keychain \
+		--without-kwallet \
+		--without-gnome-keyring
+}
+

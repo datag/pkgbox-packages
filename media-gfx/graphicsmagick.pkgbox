@@ -4,17 +4,12 @@ PKGBOX_API=1
 # Build documentation
 # http://www.graphicsmagick.org/INSTALL-unix.html
 
-pkgVer 1.3.17
+pkgVer 1.3.18
 MY_P=${P/graphicsmagick/GraphicsMagick}
 
 DESCRIPTION="GraphicsMagick is the swiss army knife of image processing"
 HOMEPAGE="http://www.graphicsmagick.org/"
-SRC_URI=(
-	"http://sourceforge.net/projects/$PN/files/$PN/$PV/$MY_P.tar.xz"
-	# another file...
-)
-
-IUSE="bzip jpeg png"
+SRC_URI="http://sourceforge.net/projects/$PN/files/$PN/$PV/$MY_P.tar.xz"
 
 S=${WORKDIR}/${MY_P}
 

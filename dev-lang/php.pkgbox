@@ -1,0 +1,83 @@
+# pkgbox: PHP
+PKGBOX_API=1
+
+# FAQ Installation: http://www.php.net/manual/en/faq.installation.php
+# Install on UNIX / Apache2: http://php.net/manual/en/install.unix.apache2.php
+# List of core configure options: http://php.net/manual/en/configure.about.php
+# Configure script (trunk): http://svn.php.net/viewvc/php/php-src/trunk/configure.in?view=markup
+
+pkgVer 5.4.12
+
+DESCRIPTION="The PHP language runtime engine"
+HOMEPAGE="http://php.net/"
+SRC_URI="http://de.php.net/get/${P}.tar.bz2/from/this/mirror?dummy=/${P}.tar.bz2"
+VCS_URI="http://git.php.net/repository/php-src.git"
+FEATURES=(
+	"layout=GNU"
+	"-apxs=${O[prefix]}/bin/apxs"	# build Apache2 module; path to APXS tool
+	"cgi"							# FastCGI
+	"php:config-file-path=${O[prefix]}/etc/php"				# path to php.ini
+	"php:config-file-scan-dir=${O[prefix]}/etc/php/conf.d"	# additional config files
+	"mysql:socket=/tmp/mysqld.sock"
+	"cli"							# Support for CLI
+	"-php:sysvsem"
+	"-php:sysvshm"
+	"-php:sysvmsg"
+	"php:opcache"					# Zend OPcache (>=PHP-5.5)
+	"ssl"
+)
+
+if pkgUseVcs; then
+	src_prepare() {
+		./buildconf
+	}
+fi
+
+src_configure() {
+	pkgConfigure \
+		$(pkgWith layout) \
+		$(pkgWith apxs apxs2) \
+		$(pkgEnable cgi) \
+		$(pkgWith php:config-file-path config-file-path -omitempty) \
+		$(pkgWith php:config-file-scan-dir config-file-scan-dir -omitempty) \
+		$(pkgEnable php:opcache opcache) \
+		--enable-mbstring \
+		--enable-calendar \
+		$(pkgEnable php:sysvsem sysvsem) \
+		$(pkgEnable php:sysvshm sysvshm) \
+		$(pkgEnable php:sysvmsg sysvmsg) \
+		--enable-bcmath \
+		--enable-ctype \
+		--with-iconv \
+		--enable-ftp \
+		--enable-soap \
+		--with-gettext \
+		--enable-wddx \
+		--with-libxml-dir \
+		--with-xsl \
+		--with-zlib \
+		--with-zlib-dir \
+		$(pkgWith ssl openssl) \
+		--with-mhash \
+		--with-mcrypt \
+		--with-curl \
+		--with-zlib-dir \
+		--with-bz2 \
+		--enable-zip \
+		--with-gd \
+		--with-freetype-dir \
+		--with-jpeg-dir \
+		--with-png-dir \
+		--enable-exif \
+		--with-mysql=mysqlnd \
+		--with-mysqli=mysqlnd \
+		--with-sqlite3 \
+		--enable-pdo \
+		--with-pdo-mysql=mysqlnd \
+		--with-pdo-sqlite \
+		$(pkgWith mysql:socket mysql-sock -omitempty) \
+		$(pkgEnable cli) \
+		--enable-pcntl \
+		--with-readline
+}
+

@@ -1,0 +1,31 @@
+# pkgbox: Apache Portable Runtime
+PKGBOX_API=1
+
+# Building on UNIX: http://apr.apache.org/compiling_unix.html
+
+pkgVer 1.5.0
+
+DESCRIPTION="Apache Portable Runtime"
+HOMEPAGE="http://apr.apache.org/"
+SRC_URI="http://apache.openmirror.de/$PN/$P.tar.bz2"
+#VCS_URI="http://svn.apache.org/repos/asf/apr/$PN/"
+FEATURES=(
+	"layout=GNU"
+	"devrandom=/dev/urandom"
+	"ipv6"
+)
+
+
+#src_prepare() {
+#	pkgUseVcs && ./buildconf || :
+#}
+
+src_configure() {
+	pkgConfigure \
+		$(pkgEnable layout) \
+		--enable-nonportable-atomics \
+		--enable-threads \
+		$(pkgEnable ipv6) \
+		$(pkgWith devrandom)
+}
+

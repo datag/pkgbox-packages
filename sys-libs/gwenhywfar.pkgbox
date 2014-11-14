@@ -1,0 +1,34 @@
+# pkgbox: Gwenhywfar
+PKGBOX_API=1
+
+pkgVer 4.12.0beta
+
+DESCRIPTION="Helper library used in aquamanic software"
+HOMEPAGE="http://www.aquamaniac.de/aqbanking/"
+SRC_URI="dummy:///$P.tar.gz"
+VCS_URI="http://git.aqbanking.de/git/gwenhywfar.git"	# http://devel.aqbanking.de/svn/gwenhywfar/trunk
+FEATURES=(
+	"gwenhywfar:plugins-ct=ohbci"		# Plugins: "ohbci" is only plugin at time of 4.3.3
+	"gwenhywfar:guis="					# GUIs: qt4 gtk2
+)
+
+
+# very strange download mechanism: part "release" is dynamic -> determine download URI
+src_fetch() {
+	local package="01"
+	local my_pv=${PV/%-git/git}		# special case
+	local release=$(pkgbox_download "http://www.aquamaniac.de/sites/download/packages.php?package=$package&showall=1" - | \
+		grep -o "package=$package.*name=\"$my_pv\"" | grep -o "release=[0-9]*" | cut -d= -f2)
+	
+	pkgbox_download "http://www2.aquamaniac.de/sites/download/download.php?package=$package&release=$release&file=01" $P.tar.gz
+}
+
+src_configure() {
+	pkgConfigure \
+		--enable-visibility \
+		--enable-ssl \
+		--disable-fox \
+		"$(pkgWith gwenhywfar:plugins-ct plugins-ct -omitempty)" \
+		"$(pkgWith gwenhywfar:guis guis)"
+}
+

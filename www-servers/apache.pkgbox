@@ -1,0 +1,35 @@
+# pkgbox: Apache httpd
+PKGBOX_API=1
+
+# Compiling and Installing: http://httpd.apache.org/docs/current/en/install.html
+# Configuring the source tree: http://httpd.apache.org/docs/current/en/programs/configure.html
+
+pkgVer 2.4.3
+MY_P=${P/apache/httpd}
+MY_PN=${PN/apache/httpd}
+
+DESCRIPTION="The Apache Web Server"
+HOMEPAGE="http://httpd.apache.org/"
+SRC_URI="http://apache.openmirror.de/$MY_PN/$MY_P.tar.bz2"
+#VCS_URI="http://svn.apache.org/repos/asf/$MY_PN/$MY_PN/"
+FEATURES=(
+	"layout=GNU"
+	"apr=${O[prefix]}"		# prefix to APR installation or path to apr-config
+	"apr-util=${O[prefix]}"	# prefix to APU installation or path to apu-config
+	"apache:mods=most"		# Modules to build: reallyall, all, most, few or none
+	"apache:mpm=worker"		# Multi-processing module: prefork, worker, event or all
+)
+
+S=${WORKDIR}/${MY_P}
+
+
+src_configure()
+{
+	pkgConfigure \
+		$(pkgEnable layout) \
+		$(pkgWith apr) \
+		$(pkgWith apr-util) \
+		"$(pkgEnable apache:mods mods-shared)" \
+		$(pkgWith apache:mpm mpm)
+}
+

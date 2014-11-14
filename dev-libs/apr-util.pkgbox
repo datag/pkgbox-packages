@@ -1,0 +1,39 @@
+# pkgbox: Apache Portable Runtime Utility
+PKGBOX_API=1
+
+# Building on UNIX: http://apr.apache.org/compiling_unix.html
+
+pkgVer 1.5.3
+
+DESCRIPTION="Apache Portable Runtime Utility"
+HOMEPAGE="http://apr.apache.org/"
+SRC_URI="http://apache.openmirror.de/apr/$P.tar.bz2"
+#VCS_URI="http://svn.apache.org/repos/asf/apr/$PN/"
+FEATURES=(
+	"layout=GNU"
+	"apr=${O[prefix]}"		# prefix to APR installation or path to apr-config
+	"ssl"
+	"sqlite3"
+)
+
+
+#src_prepare() {
+#	pkgUseVcs && ./buildconf || :
+#}
+
+src_configure() {
+	pkgConfigure \
+		$(pkgEnable layout) \
+		$(pkgWith apr) \
+		$(pkgWith ssl openssl) \
+		$(pkgWith sqlite3) \
+		--without-berkeley-db \
+		--without-gdbm \
+		--without-ldap \
+		--without-sqlite2 \
+		--without-freetds \
+		--without-mysql \
+		--without-odbc \
+		--without-pgsql
+}
+

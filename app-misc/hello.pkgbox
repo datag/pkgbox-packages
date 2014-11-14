@@ -1,0 +1,27 @@
+# pkgbox: GNU Hello
+PKGBOX_API=1
+
+# http://savannah.gnu.org/projects/hello/
+# http://www.gnu.org/software/hello/manual/
+
+pkgVer 2.8		# Git tag: v2.8
+
+DESCRIPTION="GNU 'Hello, world!' program"
+HOMEPAGE="http://www.gnu.org/software/hello/"
+SRC_URI="http://ftp.gnu.org/gnu/$PN/$P.tar.gz"
+VCS_URI="git://git.savannah.gnu.org/hello.git"
+FEATURES=(
+	"nls"		# Native language support
+)
+
+src_prepare() {
+	if pkgUseVcs; then
+		./bootstrap
+	fi
+}
+
+src_configure() {
+	pkgConfigure \
+		$(pkgEnable nls)
+}
+
