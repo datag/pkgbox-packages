@@ -10,7 +10,7 @@ MY_PN=${PN/apache/httpd}
 
 DESCRIPTION="The Apache Web Server"
 HOMEPAGE="http://httpd.apache.org/"
-SRC_URI="http://apache.openmirror.de/$MY_PN/$MY_P.tar.bz2"
+SRC_URI="https://archive.apache.org/dist/$MY_PN/$MY_P.tar.bz2"
 #VCS_URI="http://svn.apache.org/repos/asf/$MY_PN/$MY_PN/"
 FEATURES=(
 	"layout=GNU"

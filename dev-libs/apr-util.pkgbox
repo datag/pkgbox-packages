@@ -7,7 +7,7 @@ pkgVer 1.5.3
 
 DESCRIPTION="Apache Portable Runtime Utility"
 HOMEPAGE="http://apr.apache.org/"
-SRC_URI="http://apache.openmirror.de/apr/$P.tar.bz2"
+SRC_URI="https://archive.apache.org/dist/apr/$P.tar.bz2"
 #VCS_URI="http://svn.apache.org/repos/asf/apr/$PN/"
 FEATURES=(
 	"layout=GNU"
