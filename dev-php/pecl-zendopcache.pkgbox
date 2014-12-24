@@ -1,12 +1,13 @@
-# pkgbox: Zend Optimzer+
+# pkgbox: Zend OPcache
 PKGBOX_API=1
 
 # https://raw.github.com/zend-dev/ZendOptimizerPlus/master/README
+# http://pecl.php.net/package/ZendOpcache
 
-pkgVer master   # a9910f3ce21905ddb125edb18f490529ea18adfc
+pkgVer master   # 4b80490fd2256751c2c6a08362248d71b37ea0fa
 
-DESCRIPTION="Zend opcode caching extension for PHP"
-HOMEPAGE="https://github.com/zend-dev/ZendOptimizerPlus"
+DESCRIPTION="PHP Zend opcode caching extension (bundled with PHP >=5.5!)"
+HOMEPAGE="http://pecl.php.net/zendopcache"
 VCS_URI="https://github.com/zend-dev/ZendOptimizerPlus.git"
 FEATURES=(
 	"phpize=${O[prefix]}/bin/phpize"
@@ -19,6 +20,6 @@ src_configure() {
 	# --prefix will be ignored if php-config provided
 	pkgConfigure \
 		--with-php-config="$(pkgUseValue php-config)" \
-		--enable-optimizer-plus
+		--enable-enable-opcache
 }
 
