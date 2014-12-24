@@ -6,11 +6,11 @@ PKGBOX_API=1
 # List of core configure options: http://php.net/manual/en/configure.about.php
 # Configure script (trunk): http://svn.php.net/viewvc/php/php-src/trunk/configure.in?view=markup
 
-pkgVer 5.4.12
+pkgVer 5.4.35
 
 DESCRIPTION="The PHP language runtime engine"
 HOMEPAGE="http://php.net/"
-SRC_URI="http://de.php.net/get/${P}.tar.bz2/from/this/mirror?dummy=/${P}.tar.bz2"
+SRC_URI="http://php.net/get/${P}.tar.bz2/from/this/mirror?dummy=/${P}.tar.bz2"	# only current versions will be found here
 VCS_URI="http://git.php.net/repository/php-src.git"
 FEATURES=(
 	"layout=GNU"
