@@ -1,0 +1,27 @@
+# pkgbox: MariaDB
+PKGBOX_API=1
+
+# Building from source: https://mariadb.com/kb/en/mariadb/documentation/getting-started/compiling-mariadb-from-source/
+# Generic build instructions: https://mariadb.com/kb/en/mariadb/documentation/getting-started/compiling-mariadb-from-source/generic-build-instructions/
+# Gentoo eclass mysql_cmake: http://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/eclass/mysql-cmake.eclass?view=markup
+
+pkgVer 10.0.15
+
+DESCRIPTION="An enhanced, drop-in replacement for MySQL"
+HOMEPAGE="http://mariadb.org/"
+SRC_URI="https://downloads.mariadb.org/f/$P/source/$P.tar.gz"
+FEATURES=(
+	"mysql:install-prefix=${O[prefix]}/local/mariadb"
+	"mysql:socket=/tmp/mysqld.sock"
+)
+
+
+src_configure() {
+	cmake \
+		-DBUILD_CONFIG=mysql_release \
+		-DCMAKE_INSTALL_PREFIX="$(pkgUseValue mysql:install-prefix)" \
+		-DINSTALL_UNIX_ADDRDIR="$(pkgUseValue mysql:socket)" \
+		-DWITH_JEMALLOC=Off \
+		.
+}
+
