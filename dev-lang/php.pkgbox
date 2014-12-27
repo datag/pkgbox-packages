@@ -31,6 +31,9 @@ FEATURES=(
 
 if pkgUseVcs; then
 	src_prepare() {
+		# PATCH: Fix searching for freetype2 on Gentoo systems (found here: $PREFIX/include/freetype2/freetype.h)
+		sed -i -e 's~test -f "$i/include/freetype2/freetype/freetype.h";~test -f "$i/include/freetype2/freetype/freetype.h" || test -f "$i/include/freetype2/freetype.h";~' ext/gd/config.m4
+		
 		# NOTE: The buildconf-script might require a specific autoconf version. Install the
 		#       required autoconf version system-wide and set/export environment.
 		#       Example: PHP_AUTOCONF=autoconf-2.59 pkgbox ...
