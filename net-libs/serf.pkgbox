@@ -10,7 +10,6 @@ SRC_URI="http://serf.googlecode.com/svn/src_releases/$P.tar.bz2"
 FEATURES=(
 	"apr=${O[prefix]}"				# prefix to APR installation or path to apr-config
 	"apr-util=${O[prefix]}"			# prefix to APU installation or path to apu-config
-	"ssl"							# hard requirement, can't be disabled. set to alternate OpenSSL path if desired
 )
 
 src_configure() {
@@ -21,8 +20,7 @@ src_compile() {
 	scons \
 		PREFIX=$INSTALLDIR \
 		APR=$(pkgUseValue apr) \
-		APU=$(pkgUseValue apr-util) \
-		OPENSSL=$(pkgUseValue ssl)
+		APU=$(pkgUseValue apr-util)
 }
 
 src_install() {
