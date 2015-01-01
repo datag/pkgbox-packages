@@ -23,6 +23,7 @@ src_configure() {
 		-DCMAKE_INSTALL_PREFIX="$(pkgUseValue mysql:install-prefix)" \
 		-DINSTALL_MYSQLDATADIR="$(pkgUseValue mysql:datadir)" \
 		-DINSTALL_UNIX_ADDRDIR="$(pkgUseValue mysql:socket)" \
+		-DIGNORE_AIO_CHECK=On \
 		-DWITH_JEMALLOC=Off \
 		-DWITH_UNIT_TESTS=Off \
 		.
