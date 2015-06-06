@@ -67,6 +67,7 @@ src_configure() {
 		--with-zlib \
 		--with-zlib-dir \
 		$(pkgWith ssl openssl) \
+		--with-libdir=/lib/x86_64-linux-gnu \
 		--with-mhash \
 		$(pkgWith crypt mcrypt) \
 		--with-curl \
